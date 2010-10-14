@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pomodoro", "Pomodoro\Pomodoro.csproj", "{6DB667A0-79AC-48C0-ADF7-AE655757A453}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pomodoro.Web", "Pomodoro.Web\Pomodoro.Web.csproj", "{8A278670-30E1-42A9-AE05-8E5B2801699D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6DB667A0-79AC-48C0-ADF7-AE655757A453}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DB667A0-79AC-48C0-ADF7-AE655757A453}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DB667A0-79AC-48C0-ADF7-AE655757A453}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DB667A0-79AC-48C0-ADF7-AE655757A453}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A278670-30E1-42A9-AE05-8E5B2801699D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A278670-30E1-42A9-AE05-8E5B2801699D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A278670-30E1-42A9-AE05-8E5B2801699D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A278670-30E1-42A9-AE05-8E5B2801699D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
