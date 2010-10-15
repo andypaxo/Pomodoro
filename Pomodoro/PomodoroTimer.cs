@@ -45,7 +45,7 @@ namespace Pomodoro
 
         private void TimerTick(object sender, EventArgs e)
         {
-            TimeRemaining = (DateTime.Now - startTime).ToString("mm:s");
+            TimeRemaining = (DateTime.Now - startTime).ToString("mm':'ss");
         }
 
         public class StartCommand : Command
