@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows;
 using System.Windows.Threading;
 using System.ComponentModel;
 
@@ -7,8 +6,9 @@ namespace Pomodoro
 {
     public class PomodoroTimer : INotifyPropertyChanged
     {
-        public StartCommand Start { get { return new StartCommand(this); } }
 
+        public StartCommand Start { get; private set; }
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         public string TimeRemaining
@@ -20,9 +20,14 @@ namespace Pomodoro
                 NotifyPropertyChanged("TimeRemaining");
             }
         }
+        public PomodoroTimer()
+        {
+            Start = new StartCommand(this);
+        }
 
-        DispatcherTimer timer;
-        DateTime startTime;
+        private DispatcherTimer timer;
+        private DateTime startTime;
+        private TimeSpan iterationLength;
 
         private string timeRemaining;
 
@@ -32,8 +37,10 @@ namespace Pomodoro
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
 
-        void StartTicking()
+        void StartTicking(TimeSpan iterationLength)
         {
+            this.iterationLength = iterationLength;
+
             timer = new DispatcherTimer
             {
                 Interval = TimeSpan.FromSeconds(0.2)
@@ -43,17 +50,26 @@ namespace Pomodoro
             timer.Start();
         }
 
+        private void StopTicking()
+        {
+            timer.Stop();
+            Start.AllowExecute();
+            
+        }
+
         private void TimerTick(object sender, EventArgs e)
         {
-            TimeRemaining = (DateTime.Now - startTime).ToString("mm':'ss");
+            var timeDifference = DateTime.Now - startTime;
+            TimeRemaining = timeDifference.ToString("mm':'ss");
+            if (timeDifference >= iterationLength)
+                StopTicking();
         }
 
         public class StartCommand : Command
         {
-            PomodoroTimer pomodoro;
+            readonly PomodoroTimer pomodoro;
 
             public StartCommand(PomodoroTimer pomodoro)
-                : base()
             {
                 this.pomodoro = pomodoro;
             }
@@ -61,7 +77,12 @@ namespace Pomodoro
             public override void Execute(object parameter)
             {
                 ICanExecute = false;
-                pomodoro.StartTicking();
+                pomodoro.StartTicking(TimeSpan.FromSeconds(5));
+            }
+
+            public void AllowExecute()
+            {
+                ICanExecute = true;
             }
         }
     }
