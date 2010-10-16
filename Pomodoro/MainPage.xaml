@@ -5,9 +5,25 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="300" d:DesignWidth="400" DataContext="{Binding}">
+    
+    <UserControl.Resources>
+        <Style x:Key="TimerButton" TargetType="Button">
+            <Setter Property="Height" Value="36" />
+            <Setter Property="Width" Value="80" />
+            <Setter Property="Margin" Value="12,12,0,0"/>
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+        </Style>
+    </UserControl.Resources>
 
-    <Grid x:Name="LayoutRoot" Background="White">
-        <Button x:Name="Start" Height="36" Width="80" Content="Start" Command="{Binding Start}" Margin="12,12,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
-        <TextBlock x:Name="timeRemaining" Height="36" Margin="98,12,12,0" Text="{Binding TimeRemaining}" VerticalAlignment="Top" FontSize="32" FontFamily="Trebuchet MS" />
-    </Grid>
+    <StackPanel x:Name="LayoutRoot" Background="White" Orientation="Horizontal">
+        <StackPanel >
+            <TextBlock x:Name="timeRemaining" Height="50" Text="{Binding TimeRemaining}" Margin="12,12,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Trebuchet MS" HorizontalAlignment="Center"/>
+    	    <StackPanel Orientation="Horizontal">
+                <Button x:Name="Start25" Content="25" Command="{Binding Start}" CommandParameter="25" Style="{StaticResource TimerButton}" />
+                <Button x:Name="Start15" Content="15" Command="{Binding Start}" CommandParameter="15" Style="{StaticResource TimerButton}" />
+                <Button x:Name="Start05" Content="05" Command="{Binding Start}" CommandParameter="05" Style="{StaticResource TimerButton}" />
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
 </UserControl>

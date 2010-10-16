@@ -77,7 +77,8 @@ namespace Pomodoro
             public override void Execute(object parameter)
             {
                 ICanExecute = false;
-                pomodoro.StartTicking(TimeSpan.FromSeconds(5));
+                var time = Convert.ToInt32(parameter);
+                pomodoro.StartTicking(TimeSpan.FromSeconds(time));
             }
 
             public void AllowExecute()
