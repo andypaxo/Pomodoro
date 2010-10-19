@@ -10,6 +10,7 @@ namespace Pomodoro
         public StartCommand Start { get; private set; }
         
         public event PropertyChangedEventHandler PropertyChanged;
+        public event EventHandler TimerFinished;
 
         public string TimeRemaining
         {
@@ -54,7 +55,8 @@ namespace Pomodoro
         {
             timer.Stop();
             Start.AllowExecute();
-            
+            if (TimerFinished != null)
+                TimerFinished(this, EventArgs.Empty);
         }
 
         private void TimerTick(object sender, EventArgs e)

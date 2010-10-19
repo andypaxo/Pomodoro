@@ -14,11 +14,16 @@
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Top" />
         </Style>
+        <Storyboard x:Name="FlashTimer">
+            <ColorAnimation
+                Storyboard.TargetName="TimeRemaining" Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)"
+                From="White" To="Black" Duration="0:0:0.5" RepeatBehavior="Forever"/>
+        </Storyboard>
     </UserControl.Resources>
 
     <StackPanel x:Name="LayoutRoot" Background="White" Orientation="Horizontal">
         <StackPanel >
-            <TextBlock x:Name="timeRemaining" Height="50" Text="{Binding TimeRemaining}" Margin="12,12,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Trebuchet MS" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="TimeRemaining" Height="50" Text="{Binding TimeRemaining}" Margin="12,12,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Trebuchet MS" HorizontalAlignment="Center"/>
     	    <StackPanel Orientation="Horizontal">
                 <Button x:Name="Start25" Content="25" Command="{Binding Start}" CommandParameter="25" Style="{StaticResource TimerButton}" />
                 <Button x:Name="Start15" Content="15" Command="{Binding Start}" CommandParameter="15" Style="{StaticResource TimerButton}" />
