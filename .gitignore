@@ -2,3 +2,6 @@ bin/
 obj/
 *.user
 *.suo
+Bin/
+ClientBin/
+_ReSharper.*
