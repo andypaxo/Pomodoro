@@ -93,7 +93,7 @@ namespace Pomodoro
             {
                 ICanExecute = false;
                 var time = Convert.ToInt32(parameter);
-                pomodoro.StartTicking(TimeSpan.FromSeconds(time));
+                pomodoro.StartTicking(TimeSpan.FromMinutes(time));
             }
 
             public void AllowExecute()
