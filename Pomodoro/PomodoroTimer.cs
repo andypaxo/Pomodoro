@@ -21,6 +21,17 @@ namespace Pomodoro
                 NotifyPropertyChanged("TimeRemaining");
             }
         }
+
+        public string TotalTime
+        {
+            get { return totalTime; }
+            private set
+            {
+                totalTime = value;
+                NotifyPropertyChanged("TotalTime");
+            }
+        }
+
         public PomodoroTimer()
         {
             Start = new StartCommand(this);
@@ -31,6 +42,7 @@ namespace Pomodoro
         private TimeSpan iterationLength;
 
         private string timeRemaining;
+        private string totalTime;
 
         void NotifyPropertyChanged(string propName)
         {
@@ -41,6 +53,7 @@ namespace Pomodoro
         void StartTicking(TimeSpan iterationLength)
         {
             this.iterationLength = iterationLength;
+            TotalTime = iterationLength.ToString("mm':'ss");
 
             timer = new DispatcherTimer
             {
