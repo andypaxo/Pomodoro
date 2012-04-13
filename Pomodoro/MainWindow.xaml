@@ -1,11 +1,11 @@
-﻿<UserControl x:Class="Pomodoro.MainPage"
+﻿<Window x:Class="PomodoroApp.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" DataContext="{Binding}" Height="120" Width="278">
-    
-    <UserControl.Resources>
+    mc:Ignorable="d" DataContext="{Binding}" Height="165" Width="314">
+
+    <Window.Resources>
         <Style x:Key="TimerButton" TargetType="Button">
             <Setter Property="Height" Value="36" />
             <Setter Property="Width" Value="80" />
@@ -13,17 +13,17 @@
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Top" />
         </Style>
-        <Storyboard x:Name="FlashTimer">
+        <Storyboard x:Key="FlashTimer">
             <ColorAnimation
                 Storyboard.TargetName="TimeRemaining" Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)"
                 From="White" To="Black" Duration="0:0:0.5" RepeatBehavior="Forever"/>
         </Storyboard>
-    </UserControl.Resources>
+    </Window.Resources>
 
     <StackPanel x:Name="LayoutRoot" Background="White" Orientation="Horizontal">
-        <StackPanel >
+        <StackPanel Width="292">
             <TextBlock x:Name="TimeRemaining" Height="50" Text="{Binding TimeRemaining}" Margin="12,12,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Trebuchet MS" HorizontalAlignment="Center"/>
-    	    <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Width="284">
                 <Button x:Name="Start25" Content="25" Command="{Binding Start}" CommandParameter="25" Style="{StaticResource TimerButton}" />
                 <Button x:Name="Start15" Content="15" Command="{Binding Start}" CommandParameter="15" Style="{StaticResource TimerButton}" />
                 <Button x:Name="Start05" Content="05" Command="{Binding Start}" CommandParameter="05" Style="{StaticResource TimerButton}" />
@@ -38,5 +38,4 @@
             </TextBlock.RenderTransform>
         </TextBlock>
     </StackPanel>
-    
-</UserControl>
+</Window>
