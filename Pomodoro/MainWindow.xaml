@@ -3,10 +3,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" DataContext="{Binding}" Height="150" Width="296" Title="Pomodoro!" ResizeMode="NoResize">
+    mc:Ignorable="d" DataContext="{Binding}" Title="Pomodoro!" ResizeMode="NoResize" Height="153" Width="349">
 
     <Window.TaskbarItemInfo>
-        <TaskbarItemInfo ProgressState="{Binding State}" ProgressValue="{Binding ProgressValue}"/>
+        <TaskbarItemInfo ProgressState="{Binding State}" ProgressValue="{Binding ProgressValue}" />
     </Window.TaskbarItemInfo>
 
     <Window.Resources>
@@ -25,12 +25,15 @@
     </Window.Resources>
 
     <StackPanel x:Name="LayoutRoot" Background="White" Orientation="Horizontal">
-        <StackPanel>
+        <StackPanel Width="345">
             <TextBlock x:Name="TimeRemaining" Height="50" Text="{Binding TimeRemaining}" Margin="12,12,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Trebuchet MS" HorizontalAlignment="Center" FontWeight="Black" />
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Width="343">
                 <Button x:Name="Start25" Content="25" Command="{Binding Start}" CommandParameter="25" Style="{StaticResource TimerButton}" />
                 <Button x:Name="Start15" Content="15" Command="{Binding Start}" CommandParameter="15" Style="{StaticResource TimerButton}" />
                 <Button x:Name="Start05" Content="05" Command="{Binding Start}" CommandParameter="05" Style="{StaticResource TimerButton}" />
+                <Button x:Name="Unlock" Command="{Binding Unlock}" Style="{StaticResource TimerButton}" Width="36" >
+                    <Image Source="lock.png" />
+                </Button>
             </StackPanel>
         </StackPanel>
         <TextBlock Text="{Binding TotalTime}" Margin="10,45,0,0" Height="20">

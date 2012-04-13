@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Input;
 using System.Windows.Threading;
 using System.ComponentModel;
 
@@ -7,6 +8,7 @@ namespace Pomodoro
     public class PomodoroTimer : INotifyPropertyChanged
     {
         public StartCommand Start { get; private set; }
+        public UnlockCommand Unlock { get; private set; }
         
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler TimerFinished;
@@ -59,6 +61,7 @@ namespace Pomodoro
         public PomodoroTimer()
         {
             Start = new StartCommand(this);
+            Unlock = new UnlockCommand(this);
         }
 
         private DispatcherTimer timer;
@@ -109,6 +112,11 @@ namespace Pomodoro
                 StopTicking();
         }
 
+        private void UnlockControls()
+        {
+            Start.AllowExecute();
+        }
+
         public class StartCommand : Command
         {
             readonly PomodoroTimer pomodoro;
@@ -129,6 +137,28 @@ namespace Pomodoro
             {
                 ICanExecute = true;
             }
+        }
+
+        public class UnlockCommand : ICommand
+        {
+            readonly PomodoroTimer pomodoro;
+
+            public UnlockCommand(PomodoroTimer pomodoro)
+            {
+                this.pomodoro = pomodoro;
+            }
+
+            public void Execute(object parameter)
+            {
+                pomodoro.UnlockControls();
+            }
+
+            public bool CanExecute(object parameter)
+            {
+                return true;
+            }
+
+            public event EventHandler CanExecuteChanged;
         }
     }
 }
