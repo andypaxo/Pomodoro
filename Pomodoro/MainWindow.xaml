@@ -3,7 +3,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" DataContext="{Binding}" Height="165" Width="314">
+    mc:Ignorable="d" DataContext="{Binding}" Height="165" Width="314" Title="Pomodoro!">
+
+    <Window.TaskbarItemInfo>
+        <TaskbarItemInfo ProgressState="{Binding State}" ProgressValue="{Binding ProgressValue}"/>
+    </Window.TaskbarItemInfo>
 
     <Window.Resources>
         <Style x:Key="TimerButton" TargetType="Button">

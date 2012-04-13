@@ -6,7 +6,6 @@ namespace Pomodoro
 {
     public class PomodoroTimer : INotifyPropertyChanged
     {
-
         public StartCommand Start { get; private set; }
         
         public event PropertyChangedEventHandler PropertyChanged;
@@ -32,6 +31,31 @@ namespace Pomodoro
             }
         }
 
+        public string State
+        {
+            get { return state; }
+            set {
+                state = value;
+                NotifyPropertyChanged("State");
+            }
+        }
+
+        public double ProgressValue
+        {
+            get { return progressValue; }
+            set
+            {
+                progressValue = value;
+                NotifyPropertyChanged("ProgressValue");
+            }
+        }
+
+        private string timeRemaining;
+        private string totalTime;
+        private string state;
+        private double progressValue;
+
+
         public PomodoroTimer()
         {
             Start = new StartCommand(this);
@@ -41,8 +65,6 @@ namespace Pomodoro
         private DateTime startTime;
         private TimeSpan iterationLength;
 
-        private string timeRemaining;
-        private string totalTime;
 
         void NotifyPropertyChanged(string propName)
         {
@@ -62,6 +84,8 @@ namespace Pomodoro
             timer.Tick += TimerTick;
             startTime = DateTime.Now;
             timer.Start();
+
+            State = "Normal";
         }
 
         private void StopTicking()
@@ -70,12 +94,17 @@ namespace Pomodoro
             Start.AllowExecute();
             if (TimerFinished != null)
                 TimerFinished(this, EventArgs.Empty);
+
+            State = "None";
         }
 
         private void TimerTick(object sender, EventArgs e)
         {
             var timeDifference = DateTime.Now - startTime;
             TimeRemaining = timeDifference.ToString("mm':'ss");
+
+            ProgressValue = timeDifference.TotalMilliseconds / iterationLength.TotalMilliseconds;
+
             if (timeDifference >= iterationLength)
                 StopTicking();
         }
