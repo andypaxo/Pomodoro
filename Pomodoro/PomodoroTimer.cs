@@ -52,6 +52,17 @@ namespace Pomodoro
             }
         }
 
+        private string statusText;
+        public string StatusText
+        {
+            get { return statusText; }
+            set
+            {
+                statusText = value;
+                NotifyPropertyChanged("StatusText");
+            }
+        }
+
         private string timeRemaining;
         private string totalTime;
         private string state;
@@ -98,6 +109,7 @@ namespace Pomodoro
             if (TimerFinished != null)
                 TimerFinished(this, EventArgs.Empty);
 
+            StatusText += Start.CompletionText;
             State = "None";
         }
 
@@ -120,6 +132,7 @@ namespace Pomodoro
         public class StartCommand : Command
         {
             readonly PomodoroTimer pomodoro;
+            public string CompletionText;
 
             public StartCommand(PomodoroTimer pomodoro)
             {
@@ -129,7 +142,9 @@ namespace Pomodoro
             public override void Execute(object parameter)
             {
                 ICanExecute = false;
-                var time = Convert.ToInt32(parameter);
+                var parameters = parameter.ToString().Split(',');
+                var time = Convert.ToInt32(parameters[0]);
+                CompletionText = parameters[1];
                 pomodoro.StartTicking(TimeSpan.FromMinutes(time));
             }
 
