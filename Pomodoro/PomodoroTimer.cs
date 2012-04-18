@@ -110,7 +110,7 @@ namespace Pomodoro
                 TimerFinished(this, EventArgs.Empty);
 
             StatusText += Start.CompletionText;
-            State = "None";
+            State = "Indeterminate";
         }
 
         private void TimerTick(object sender, EventArgs e)
@@ -174,6 +174,12 @@ namespace Pomodoro
             }
 
             public event EventHandler CanExecuteChanged;
+        }
+
+        public void GotFocus()
+        {
+            if (State == "Indeterminate") { }
+                State = "None";
         }
     }
 }

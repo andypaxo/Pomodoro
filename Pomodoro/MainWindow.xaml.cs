@@ -20,6 +20,8 @@ namespace PomodoroApp
             var flashTimer = (Storyboard)FindResource("FlashTimer");
             Model.TimerFinished += (s, e) => flashTimer.Begin();
             Model.Start.CanExecuteChanged += (s, e) => flashTimer.Stop();
+
+            Activated += (s, e) => Model.GotFocus();
         }
     }
 }
